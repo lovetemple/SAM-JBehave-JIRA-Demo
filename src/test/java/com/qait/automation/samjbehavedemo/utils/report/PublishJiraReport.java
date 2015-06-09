@@ -193,11 +193,11 @@ public class PublishJiraReport {
 	}
 
 	private String getCloseTicketJson() {
-		return "{ \"fields\": { \"assignee\": { \"name\": \"-1\" }, \"resolution\": { \"name\": \"Fixed\" } }, \"transition\": { \"id\": \"5\" }}";
+		return "{ \"fields\": { \"assignee\": { \"name\": \"-1\" }, \"resolution\": { \"name\": \"Fixed\" } }, \"transition\": { \"id\": \"51\" }}";
 	}
 
 	private String getReopenJiraTicketJson() {
-		return "{ \"fields\": { \"assignee\": { \"name\": \"prashant.shukla\" }, \"resolution\": { \"name\": \"Unresolved\" } }, \"transition\": { \"id\": \"3\" }}";
+		return "{ \"fields\": { \"assignee\": { \"name\": \"prashant.shukla\" }, \"resolution\": { \"name\": \"Unresolved\" } }, \"transition\": { \"id\": \"41\" }}";
 
 	}
 

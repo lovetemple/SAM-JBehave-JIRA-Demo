@@ -64,7 +64,7 @@ public class StoryTest extends JUnitStories {
         }
 
         configuredEmbedder().embedderControls().doGenerateViewAfterStories(true).doIgnoreFailureInStories(true)
-                .doIgnoreFailureInView(true).useThreads(2).useStoryTimeoutInSecs(60);
+                .doIgnoreFailureInView(true).useThreads(5).useStoryTimeoutInSecs(60);
     }
 
     @Override
