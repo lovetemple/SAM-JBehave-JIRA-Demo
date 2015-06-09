@@ -72,7 +72,7 @@ public class BaseUi {
 					+ expectedPagetitle + "'");
 		} catch (TimeoutException ex) {
 			Assert.fail("TEST FAILED: PageTitle for " + pageName + " is not exactly: '"
-					+ expectedPagetitle + "'!!!\n instead it is :- " + driver.getTitle());
+					+ expectedPagetitle + "'!!!\\n instead it is :- " + driver.getTitle());
 		}
 	}
 

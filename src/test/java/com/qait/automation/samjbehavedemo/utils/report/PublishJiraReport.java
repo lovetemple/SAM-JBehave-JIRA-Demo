@@ -66,7 +66,7 @@ public class PublishJiraReport {
 
 						if (step.endsWith("- SUCCESSFUL")) {
 							jsonResultText = jsonResultText
-									+ "\\t{color:green}" + step + "{color}"
+									+ "\\n{color:green}" + step + "{color}"
 									+ "\\n";
 						} else if (step.endsWith("- FAILED")) {
 							jsonResultText = jsonResultText + "\\t{color:red}"
@@ -74,7 +74,7 @@ public class PublishJiraReport {
 						}
 
 						else if (step.endsWith("- NOTPERFORMED")) {
-							jsonResultText = jsonResultText + "\\t{color:blue}"
+							jsonResultText = jsonResultText + "\\n{color:blue}"
 									+ step + "{color}" + "\\n";
 						}
 					}
@@ -149,8 +149,8 @@ public class PublishJiraReport {
 
 		if (getstoryStatus(_storystatus.values()).contains(FAIL)) {
 
-			response = new HttpClient().postHttpResponse(jiratransitionurl,
-					getReopenJiraTicketJson()).getEntity(String.class);
+//			response = new HttpClient().postHttpResponse(jiratransitionurl,
+//					getReopenJiraTicketJson()).getEntity(String.class);
 
 			getChangeAssigneeJson("prashant.shukla");
 			System.out.println("\nREOPENING JIRA TICKET:- " + _jiraStoryId
