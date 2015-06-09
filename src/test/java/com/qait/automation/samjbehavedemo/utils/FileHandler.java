@@ -5,6 +5,7 @@
  */
 package com.qait.automation.samjbehavedemo.utils;
 
+import com.qait.automation.samjbehavedemo.getstory.Constants;
 import com.qait.automation.samjbehavedemo.getstory.JiraStoryDownloader;
 
 import java.io.File;

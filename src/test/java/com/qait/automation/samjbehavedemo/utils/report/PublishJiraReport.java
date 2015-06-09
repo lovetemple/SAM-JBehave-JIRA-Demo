@@ -11,15 +11,16 @@ import java.util.Map;
 
 import org.w3c.dom.Element;
 
-import com.qait.automation.samjbehavedemo.utils.Constants;
+import com.qait.automation.samjbehavedemo.getstory.Constants;
 import com.qait.automation.samjbehavedemo.utils.FileHandler;
 import com.qait.automation.samjbehavedemo.utils.HttpClient;
 import com.qait.automation.samjbehavedemo.utils.StoryXMLParser;
+import com.sun.jersey.api.client.UniformInterfaceException;
 
 import static com.qait.automation.samjbehavedemo.utils.TestStates.*;
 
 /**
- *
+ * 
  * @author prashantshukla
  */
 public class PublishJiraReport {
@@ -143,25 +144,32 @@ public class PublishJiraReport {
 			Map<String, String> _storystatus) {
 		String response = "";
 
+		String jiratransitionurl = Constants.JIRA_URL + Constants.JIRA_ISSUE
+				+ _jiraStoryId + "/" + Constants.JIRA_TRANSITION;
+
 		if (getstoryStatus(_storystatus.values()).contains(FAIL)) {
-			String jiratransitionurl = Constants.JIRA_URL + Constants.JIRA_ISSUE
-					+ _jiraStoryId + "/" + Constants.JIRA_TRANSITION;
+
 			response = new HttpClient().postHttpResponse(jiratransitionurl,
 					getReopenJiraTicketJson()).getEntity(String.class);
+
+			getChangeAssigneeJson("prashant.shukla");
 			System.out.println("\nREOPENING JIRA TICKET:- " + _jiraStoryId
 					+ "\n");
 
 		} else if (getstoryStatus(_storystatus.values()).contains(PENDING)) {
 			// no action + send mail
 		} else {
-			String jiratransitionurl = Constants.JIRA_URL + Constants.JIRA_ISSUE
-					+ _jiraStoryId + "/" + Constants.JIRA_TRANSITION;
-			response = new HttpClient().postHttpResponse(jiratransitionurl,
-					getCloseTicketJson()).getEntity(String.class);
-			System.out.println("\nCLOSING JIRA TICKET:- " + _jiraStoryId + "\n");
-		}
-		System.out.println(response);
+			try {
+				response = new HttpClient().postHttpResponse(jiratransitionurl,
+						getCloseTicketJson()).getEntity(String.class);
+				changeJiraAssignee(_jiraStoryId, "-1");
+			} catch (UniformInterfaceException e) {
+				// TODO: handle exception
+			}
 
+			System.out
+					.println("\nCLOSING JIRA TICKET:- " + _jiraStoryId + "\n");
+		}
 		return response;
 	}
 
@@ -181,10 +189,13 @@ public class PublishJiraReport {
 		String response = "";
 		String jiraassgineeurl = Constants.JIRA_URL + Constants.JIRA_ISSUE
 				+ _jiraStoryId + "/" + Constants.JIRA_ASSIGNEE;
-		response = new HttpClient().putHttpResponse(jiraassgineeurl,
-				getChangeAssigneeJson(jiraUserName)).getEntity(String.class);
-
-		System.out.println(response);
+		try {
+			response = new HttpClient().putHttpResponse(jiraassgineeurl,
+					getChangeAssigneeJson(jiraUserName))
+					.getEntity(String.class);
+		} catch (UniformInterfaceException e) {
+			// TODO: handle exception
+		}
 		return response;
 	}
 
@@ -193,11 +204,11 @@ public class PublishJiraReport {
 	}
 
 	private String getCloseTicketJson() {
-		return "{ \"fields\": { \"assignee\": { \"name\": \"-1\" }, \"resolution\": { \"name\": \"Fixed\" } }, \"transition\": { \"id\": \"51\" }}";
+		return "{ \"transition\": { \"id\": \"51\" }}";
 	}
 
 	private String getReopenJiraTicketJson() {
-		return "{ \"fields\": { \"assignee\": { \"name\": \"prashant.shukla\" }, \"resolution\": { \"name\": \"Unresolved\" } }, \"transition\": { \"id\": \"41\" }}";
+		return "{ \"transition\": { \"id\": \"71\" }}";
 
 	}
 

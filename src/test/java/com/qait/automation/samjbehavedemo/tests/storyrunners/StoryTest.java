@@ -17,8 +17,8 @@ import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
 
+import com.qait.automation.samjbehavedemo.getstory.Constants;
 import com.qait.automation.samjbehavedemo.getstory.JiraSprintStoryFinder;
-import com.qait.automation.samjbehavedemo.utils.Constants;
 import com.qait.automation.samjbehavedemo.utils.FileHandler;
 import com.qait.automation.samjbehavedemo.getstory.JiraStoryDownloader;
 import com.qait.automation.samjbehavedemo.stepdefs.ExampleSteps;

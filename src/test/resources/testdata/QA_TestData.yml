@@ -1,4 +1,13 @@
-base_url: https://app.opentopictest.org/login/
+app_url: https://app.opentopictest.org/login/
+
+creadentials:
+  instructor:
+    username: inst5june@qai.com
+    password: password 
+  student:
+    username: stud5june@qai.com
+    password: password
+      
 
 email:
     send: yes

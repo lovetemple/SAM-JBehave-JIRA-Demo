@@ -1,6 +1,5 @@
 package com.qait.automation.samjbehavedemo.getstory;
 
-import com.qait.automation.samjbehavedemo.utils.Constants;
 import com.qait.automation.samjbehavedemo.utils.HttpClient;
 import com.qait.automation.samjbehavedemo.utils.JsonParser;
 import com.sun.jersey.api.client.ClientResponse;

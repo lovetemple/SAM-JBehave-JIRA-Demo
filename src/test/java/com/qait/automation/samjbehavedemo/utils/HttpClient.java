@@ -5,6 +5,7 @@
  */
 package com.qait.automation.samjbehavedemo.utils;
 
+import com.qait.automation.samjbehavedemo.getstory.Constants;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -14,7 +15,7 @@ import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.api.json.JSONConfiguration;
 
 /**
- *
+ * 
  * @author prashantshukla
  */
 public class HttpClient {
@@ -32,14 +33,15 @@ public class HttpClient {
 	}
 
 	public ClientResponse postHttpResponse(String resourceURL, Object postBody) {
+		ClientResponse response = null;
+
 		Client client = getJiraClient();
 
 		WebResource webResourcePost = client.resource(resourceURL);
 
-		System.out.println(postBody);
-		
-		ClientResponse response = webResourcePost.type("application/json")
-				.post(ClientResponse.class, postBody);
+		response = webResourcePost.type("application/json").post(
+				ClientResponse.class, postBody);
+
 		return response;
 	}
 
