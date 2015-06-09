@@ -57,15 +57,15 @@ public class StoryTest extends JUnitStories {
     public StoryTest() {
     	
 
-//        FileHandler.cleanStoryLocation();
-//
-//        JiraSprintStoryFinder sprintStories = new JiraSprintStoryFinder(rapidViewId);
-//
-//        for (String sprintStory : sprintStories.getJiraSprintStories()) {
-//            System.out.println("Loading Story:- " + sprintStory);
-//            JiraStoryDownloader jirastory = new JiraStoryDownloader(sprintStory);
-//            jirastory.storeJiraStoryLocally();
-//        }
+        FileHandler.cleanStoryLocation();
+
+        JiraSprintStoryFinder sprintStories = new JiraSprintStoryFinder(rapidViewId);
+
+        for (String sprintStory : sprintStories.getJiraSprintStories()) {
+            System.out.println("Loading Story:- " + sprintStory);
+            JiraStoryDownloader jirastory = new JiraStoryDownloader(sprintStory);
+            jirastory.storeJiraStoryLocally();
+        }
 
         configuredEmbedder().embedderControls().doGenerateViewAfterStories(true).doIgnoreFailureInStories(true)
                 .doIgnoreFailureInView(true).useThreads(1).useStoryTimeoutInSecs(60);
