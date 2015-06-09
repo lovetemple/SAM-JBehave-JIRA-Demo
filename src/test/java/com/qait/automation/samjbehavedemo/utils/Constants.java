@@ -5,7 +5,7 @@ import java.util.List;
 
 public final class Constants {
 
-    public static final String JIRA_URL = System.getProperty("jirahost", "http://localhost:8080");
+    public static final String JIRA_URL = System.getProperty("jirahost", "http://localhost:8080/");
     public static final String JIRA_USERNAME = "automation-script";
     public static final String JIRA_PASSWORD = "Qait@123";
 
