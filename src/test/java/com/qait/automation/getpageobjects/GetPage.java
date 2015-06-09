@@ -108,9 +108,8 @@ public class GetPage extends BaseUi {
 
     protected void verifyElementText(String elementName, String expectedText) {
         wait.waitForElementToBeVisible(element(elementName));
-        assertEquals(element(elementName).getText().trim(), expectedText,
-                "TEST FAILED: element '" + elementName
-                + "' Text is not as expected: ");
+        assertEquals(  "TEST FAILED: element '" + elementName
+                + "' Text is not as expected: ", element(elementName).getText().trim(), expectedText);
         logMessage("TEST PASSED: element " + elementName
                 + " is visible and Text is " + expectedText);
     }

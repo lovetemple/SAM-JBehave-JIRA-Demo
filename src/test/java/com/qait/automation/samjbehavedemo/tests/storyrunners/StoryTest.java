@@ -17,11 +17,13 @@ import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
 
+import com.qait.automation.TestSessionInitiator;
 import com.qait.automation.samjbehavedemo.getstory.Constants;
 import com.qait.automation.samjbehavedemo.getstory.JiraSprintStoryFinder;
 import com.qait.automation.samjbehavedemo.utils.FileHandler;
 import com.qait.automation.samjbehavedemo.getstory.JiraStoryDownloader;
-import com.qait.automation.samjbehavedemo.stepdefs.ExampleSteps;
+import com.qait.automation.samjbehavedemo.stepdefs.PageStepDef;
+import com.qait.automation.samjbehavedemo.stepdefs.StartTestSteps;
 
 import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
@@ -48,17 +50,20 @@ import org.jbehave.core.steps.ParameterConverters;
 public class StoryTest extends JUnitStories {
 
     private final String rapidViewId = "1";
+    TestSessionInitiator test;
 
     private final CrossReference xref = new CrossReference();
 
     public StoryTest() {
+    	
+    	test = new TestSessionInitiator();
 
         FileHandler.cleanStoryLocation();
 
         JiraSprintStoryFinder sprintStories = new JiraSprintStoryFinder(rapidViewId);
 
         for (String sprintStory : sprintStories.getJiraSprintStories()) {
-            System.out.println("Loadind Story:- " + sprintStory);
+            System.out.println("Loading Story:- " + sprintStory);
             JiraStoryDownloader jirastory = new JiraStoryDownloader(sprintStory);
             jirastory.storeJiraStoryLocally();
         }
@@ -107,7 +112,7 @@ public class StoryTest extends JUnitStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration(), new ExampleSteps());
+        return new InstanceStepsFactory(configuration(), new StartTestSteps(test), new PageStepDef(test) );
     }
 
     @Override

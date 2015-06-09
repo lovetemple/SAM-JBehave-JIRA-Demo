@@ -1,13 +1,15 @@
-Page Title: Opentopic dashboard
+Page Title: SAM - Log In
 
 #Object Definitions
 ====================================================================================
-txt_header      css body.login-page header h1
 
-inp_username    css input#id_username
-inp_password    css input#id_password
-btn_singin      css button[type="submit"]
+inp_username    css #ctl00__mainConentPlaceholder_tbUserName
+inp_password    css #ctl00__mainConentPlaceholder_tbPassword
+btn_login      css #ctl00__mainConentPlaceholder_btnLogin
 
+btn_studentView	css	#btnStudentView
+
+lnk_dropbox	xpath	//*[@id="topNav"]/div/ul/li[3]/a
 ====================================================================================
 
 @all, browsers

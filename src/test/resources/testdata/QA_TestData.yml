@@ -1,6 +1,6 @@
-app_url: https://app.opentopictest.org/login/
+app_url: http://qa3-sam.cengage.com/app
 
-creadentials:
+credentials:
   instructor:
     username: inst5june@qai.com
     password: password 
