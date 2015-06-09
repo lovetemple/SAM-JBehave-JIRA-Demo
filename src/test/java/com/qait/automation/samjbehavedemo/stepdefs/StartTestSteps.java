@@ -2,6 +2,7 @@ package com.qait.automation.samjbehavedemo.stepdefs;
 
 import static com.qait.automation.samjbehavedemo.utils.YamlReader.getData;
 
+import org.jbehave.core.annotations.AfterStories;
 import org.jbehave.core.annotations.AfterStory;
 import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
@@ -17,8 +18,9 @@ public class StartTestSteps{
 	
 	public StartTestSteps() {
 		this.test = new TestSessionInitiator();
-		loginpage = new LoginPageActionKeyWords(test.getDriver());
-		pagestep = new PageStepDef(test);
+		this.test.testInitiator();
+		loginpage = new LoginPageActionKeyWords(this.test.getDriver());
+		pagestep = new PageStepDef(this.test);
 	}
 	
 	public StartTestSteps(TestSessionInitiator test) {
@@ -41,7 +43,7 @@ public class StartTestSteps{
 		this.test.closeTestSession();
 	}
 	
-	@AfterStory
+	@AfterStories
 	public void quitBrowserSession(){
 		this.test.closeTestSession();
 	}

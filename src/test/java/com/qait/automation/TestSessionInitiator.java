@@ -55,7 +55,7 @@ public class TestSessionInitiator {
 		testInitiator();
 	}
 
-	private void testInitiator() {
+	public void testInitiator() {
 		setYamlFilePath();
 		_configureBrowser();
 		//_initPage();
@@ -98,7 +98,8 @@ public class TestSessionInitiator {
 
 	public void closeBrowserSession() {
 		System.out.println("\n");
-		driver.quit();
+		//driver.quit();
+		driver.close();
 	}
 
 	public void closeTestSession() {

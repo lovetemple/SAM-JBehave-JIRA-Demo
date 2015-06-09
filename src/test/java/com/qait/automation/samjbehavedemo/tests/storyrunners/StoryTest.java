@@ -56,20 +56,19 @@ public class StoryTest extends JUnitStories {
 
     public StoryTest() {
     	
-    	test = new TestSessionInitiator();
 
-        FileHandler.cleanStoryLocation();
-
-        JiraSprintStoryFinder sprintStories = new JiraSprintStoryFinder(rapidViewId);
-
-        for (String sprintStory : sprintStories.getJiraSprintStories()) {
-            System.out.println("Loading Story:- " + sprintStory);
-            JiraStoryDownloader jirastory = new JiraStoryDownloader(sprintStory);
-            jirastory.storeJiraStoryLocally();
-        }
+//        FileHandler.cleanStoryLocation();
+//
+//        JiraSprintStoryFinder sprintStories = new JiraSprintStoryFinder(rapidViewId);
+//
+//        for (String sprintStory : sprintStories.getJiraSprintStories()) {
+//            System.out.println("Loading Story:- " + sprintStory);
+//            JiraStoryDownloader jirastory = new JiraStoryDownloader(sprintStory);
+//            jirastory.storeJiraStoryLocally();
+//        }
 
         configuredEmbedder().embedderControls().doGenerateViewAfterStories(true).doIgnoreFailureInStories(true)
-                .doIgnoreFailureInView(true).useThreads(5).useStoryTimeoutInSecs(60);
+                .doIgnoreFailureInView(true).useThreads(1).useStoryTimeoutInSecs(60);
     }
 
     @Override
@@ -112,6 +111,8 @@ public class StoryTest extends JUnitStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
+    	test = new TestSessionInitiator();
+
         return new InstanceStepsFactory(configuration(), new StartTestSteps(test), new PageStepDef(test) );
     }
 
