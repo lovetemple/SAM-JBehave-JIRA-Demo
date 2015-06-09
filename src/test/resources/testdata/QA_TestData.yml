@@ -1,0 +1,6 @@
+base_url: https://app.opentopictest.org/login/
+
+email:
+    send: yes
+    recepients:
+     recepient1: prashantshukla@qainfotech.com

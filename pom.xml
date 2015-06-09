@@ -53,7 +53,6 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>integration-test</goal>
 							<goal>verify</goal>
 						</goals>
 					</execution>
@@ -66,8 +65,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 
 	<dependencies>
 		<dependency>
@@ -109,6 +106,13 @@
 			<version>1.18</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.mindengine</groupId>
+			<artifactId>galen</artifactId>
+			<version>1.6.3</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<packaging>pom</packaging>
