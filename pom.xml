@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.qait.automation</groupId>
-	<artifactId>JIRA-JBehave-Demo</artifactId>
+	<artifactId>SAM-JBehave-JIRA-Demo</artifactId>
 	<version>0.1-SNAPSHOT</version>
 
 	<properties>
