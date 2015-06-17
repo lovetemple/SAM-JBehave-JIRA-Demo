@@ -5,6 +5,8 @@
  */
 package com.qait.automation.samjbehavedemo.getstory;
 
+import com.qait.automation.samjbehavedemo.utils.ConfigPropertyReader;
+import com.qait.automation.samjbehavedemo.utils.report.email.Emailer;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.codehaus.jettison.json.JSONException;
 
 /**
  *
@@ -32,12 +35,15 @@ public class JiraStoryDownloader {
     }
 
     public void storeJiraStoryLocally() {
-        storeJiraStoryLocally(getJiraStory());
+        try {
+            storeJiraStoryLocally(getJiraStory());
+        } catch (JSONException ex) {
+            new Emailer().send_email(this.jiraStoryId, ConfigPropertyReader.getProperty("qa-engineer"));
+        }
     }
 
     public void storeJiraStoryLocally(String jiraStory) {
         File storiesDir = new File(storyLoc);
-
         if (!storiesDir.exists()) {
             storiesDir.mkdir();
         }
@@ -58,7 +64,7 @@ public class JiraStoryDownloader {
 
     }
 
-    private String getJiraStory() {
+    private String getJiraStory() throws JSONException{
         return this.jiraStory.getStory();
     }
 

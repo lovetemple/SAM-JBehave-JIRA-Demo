@@ -10,6 +10,7 @@ btn_login      css #ctl00__mainConentPlaceholder_btnLogin
 btn_studentView	css	#btnStudentView
 
 lnk_dropbox	xpath	//*[@id="topNav"]/div/ul/li[3]/a
+lbl_dropbox     css     label.DropboxLabel
 ====================================================================================
 
 @all, browsers

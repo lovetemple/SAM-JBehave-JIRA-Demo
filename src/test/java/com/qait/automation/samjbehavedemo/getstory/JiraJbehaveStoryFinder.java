@@ -3,6 +3,7 @@ package com.qait.automation.samjbehavedemo.getstory;
 import com.qait.automation.samjbehavedemo.utils.HttpClient;
 import com.qait.automation.samjbehavedemo.utils.JsonParser;
 import com.sun.jersey.api.client.ClientResponse;
+import org.codehaus.jettison.json.JSONException;
 
 /**
  *
@@ -21,7 +22,7 @@ public class JiraJbehaveStoryFinder {
         return this.jiraStoryResource;
     }
 
-    public String getStory() {
+    public String getStory() throws JSONException{
         HttpClient httpclient = new HttpClient();
 
         ClientResponse response = httpclient.getHttpResponse(this.jiraStoryResource);

@@ -49,7 +49,7 @@ import org.jbehave.core.steps.ParameterConverters;
  */
 public class StoryTest extends JUnitStories {
 
-    private final String rapidViewId = "1";
+    private final String rapidViewId = "2";
     TestSessionInitiator test;
 
     private final CrossReference xref = new CrossReference();
@@ -61,11 +61,12 @@ public class StoryTest extends JUnitStories {
 
         JiraSprintStoryFinder sprintStories = new JiraSprintStoryFinder(rapidViewId);
 
-        for (String sprintStory : sprintStories.getJiraSprintStories()) {
+        sprintStories.getJiraSprintStories().stream().map((sprintStory) -> {
             System.out.println("Loading Story:- " + sprintStory);
-            JiraStoryDownloader jirastory = new JiraStoryDownloader(sprintStory);
+            return sprintStory;
+        }).map((sprintStory) -> new JiraStoryDownloader(sprintStory)).forEach((jirastory) -> {
             jirastory.storeJiraStoryLocally();
-        }
+        });
 
         configuredEmbedder().embedderControls().doGenerateViewAfterStories(true).doIgnoreFailureInStories(true)
                 .doIgnoreFailureInView(true).useThreads(1).useStoryTimeoutInSecs(60);
