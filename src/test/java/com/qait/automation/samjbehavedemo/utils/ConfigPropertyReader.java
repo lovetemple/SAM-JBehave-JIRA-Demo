@@ -28,8 +28,12 @@ public class ConfigPropertyReader {
      */
     public static String getProperty(String propFile, String Property) {
         try {
+            if (System.getProperty(Property) != null){
+                return System.getProperty(Property);
+            }
+            else{
             Properties prop = ResourceLoader.loadProperties(propFile);
-            return prop.getProperty(Property);
+            return prop.getProperty(Property);}
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
