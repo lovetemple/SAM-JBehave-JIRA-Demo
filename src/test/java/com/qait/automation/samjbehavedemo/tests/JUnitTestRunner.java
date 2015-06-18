@@ -14,10 +14,5 @@ public class JUnitTestRunner {
     @Test
     public void testNoJbehavStory() {
 
-        FileHandler.cleanStoryLocation();
-
-        JiraStoryDownloader jirastory = new JiraStoryDownloader("SLD-4");
-
-        jirastory.storeJiraStoryLocally();
     }
 }

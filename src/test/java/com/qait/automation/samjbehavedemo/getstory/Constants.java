@@ -19,7 +19,7 @@ public final class Constants {
     public static final String JIRA_ASSIGNEE = "assignee/";
     public static final String JIRA_TRANSITION = "transitions/";
 
-    public static final List<String> ALLOWED_STATUS = Arrays.asList("Open", "In Progress", "Ready For QA");
+    public static final List<String> ALLOWED_STATUS = Arrays.asList( "Ready For QA");
     public static final List<String> ALLOWED_TYPE = Arrays.asList("Story", "Bug", "Epic");
 
     public static final String STORY_LOC = "./src/test/resources/stories/"; //DO NOT CHANGE THIS. MIGHT BREAK JBEHAVE

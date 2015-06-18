@@ -7,6 +7,7 @@ package com.qait.automation.samjbehavedemo.getstory;
 
 import com.qait.automation.samjbehavedemo.utils.ConfigPropertyReader;
 import com.qait.automation.samjbehavedemo.utils.report.email.Emailer;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,6 +18,9 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.mail.MessagingException;
+
 import org.codehaus.jettison.json.JSONException;
 
 /**
@@ -38,7 +42,17 @@ public class JiraStoryDownloader {
         try {
             storeJiraStoryLocally(getJiraStory());
         } catch (JSONException ex) {
-            new Emailer().send_email(this.jiraStoryId, ConfigPropertyReader.getProperty("qa-engineer"));
+            try {
+                new Emailer(this.jiraStoryId, "nojbehavestory",
+                        "qa-engineer")
+                        .sendResultsMail();
+            } catch (MessagingException | IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            System.out.println("[INFO: ]" + jiraStoryId
+                    + " does not have JBEHAVE story written yet. Mail sent to "
+                    + ConfigPropertyReader.getProperty("qa-engineer"));
         }
     }
 
@@ -49,22 +63,26 @@ public class JiraStoryDownloader {
         }
 
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(storyLoc + this.jiraStoryId + ".story"), "utf-8"))) {
+                new FileOutputStream(storyLoc + this.jiraStoryId + ".story"),
+                "utf-8"))) {
             writer.write(jiraStory);
         } catch (UnsupportedEncodingException ex) {
             ex.printStackTrace();
-            Logger.getLogger(JiraStoryDownloader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JiraStoryDownloader.class.getName()).log(
+                    Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
-            Logger.getLogger(JiraStoryDownloader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JiraStoryDownloader.class.getName()).log(
+                    Level.SEVERE, null, ex);
         } catch (IOException ex) {
             ex.printStackTrace();
-            Logger.getLogger(JiraStoryDownloader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JiraStoryDownloader.class.getName()).log(
+                    Level.SEVERE, null, ex);
         }
 
     }
 
-    private String getJiraStory() throws JSONException{
+    private String getJiraStory() throws JSONException {
         return this.jiraStory.getStory();
     }
 
