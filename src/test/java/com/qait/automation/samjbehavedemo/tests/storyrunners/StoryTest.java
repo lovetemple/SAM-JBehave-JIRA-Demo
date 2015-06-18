@@ -25,6 +25,8 @@ import com.qait.automation.samjbehavedemo.getstory.JiraStoryDownloader;
 import com.qait.automation.samjbehavedemo.stepdefs.PageStepDef;
 import com.qait.automation.samjbehavedemo.stepdefs.StartTestSteps;
 
+import static com.qait.automation.samjbehavedemo.utils.ConfigPropertyReader.getProperty;
+
 import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
@@ -49,25 +51,27 @@ import org.jbehave.core.steps.ParameterConverters;
  */
 public class StoryTest extends JUnitStories {
 
-    private final String rapidViewId = "2";
+    //private final String rapidViewId = "2";
     TestSessionInitiator test;
 
     private final CrossReference xref = new CrossReference();
 
     public StoryTest() {
-    	
 
         FileHandler.cleanStoryLocation();
 
-        JiraSprintStoryFinder sprintStories = new JiraSprintStoryFinder(rapidViewId);
+        if (System.getProperty("storyId") != null) {
+            new JiraStoryDownloader(System.getProperty("storyId")).storeJiraStoryLocally();
+        } else {
 
-        sprintStories.getJiraSprintStories().stream().map((sprintStory) -> {
-            System.out.println("Loading Story:- " + sprintStory);
-            return sprintStory;
-        }).map((sprintStory) -> new JiraStoryDownloader(sprintStory)).forEach((jirastory) -> {
-            jirastory.storeJiraStoryLocally();
-        });
+            JiraSprintStoryFinder sprintStories = new JiraSprintStoryFinder(getProperty("rapidViewId"));
 
+            sprintStories.getJiraSprintStories().stream().map((sprintStory) -> {
+                return sprintStory;
+            }).map((sprintStory) -> new JiraStoryDownloader(sprintStory)).forEach((jirastory) -> {
+                jirastory.storeJiraStoryLocally();
+            });
+        }
         configuredEmbedder().embedderControls().doGenerateViewAfterStories(true).doIgnoreFailureInStories(true)
                 .doIgnoreFailureInView(true).useThreads(1).useStoryTimeoutInSecs(60);
     }
@@ -112,9 +116,9 @@ public class StoryTest extends JUnitStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-    	test = new TestSessionInitiator();
+        test = new TestSessionInitiator();
 
-        return new InstanceStepsFactory(configuration(), new StartTestSteps(test), new PageStepDef(test) );
+        return new InstanceStepsFactory(configuration(), new StartTestSteps(test), new PageStepDef(test));
     }
 
     @Override

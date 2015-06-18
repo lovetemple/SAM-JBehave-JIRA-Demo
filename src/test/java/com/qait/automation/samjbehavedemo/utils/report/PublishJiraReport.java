@@ -48,7 +48,8 @@ public class PublishJiraReport {
 
             Map<String, Integer> scenarioResult = xml
                     .getScenarioResult(scenarioElement);
-
+            System.out.println(scenarioResult);
+            
             if (scenarioResult.get(PENDING) == 0) {
 
                 if (scenarioResult.get(FAIL) == 0) {
@@ -160,7 +161,7 @@ public class PublishJiraReport {
             System.out.println("\nREOPENING JIRA TICKET:- " + _jiraStoryId
                     + "\n");
             return response;
-        } else {
+        } else if (getstoryStatus(_storystatus.values()).equalsIgnoreCase(PASS)){
             try {
                 response = new HttpClient().postHttpResponse(jiratransitionurl,
                         getCloseTicketJson()).getEntity(String.class);
@@ -172,6 +173,7 @@ public class PublishJiraReport {
                     .println("\nCLOSING JIRA TICKET:- " + _jiraStoryId + "\n");
             return response;
         }
+        return response;
     }
 
     private String getstoryStatus(Collection<String> storyvalues) {
