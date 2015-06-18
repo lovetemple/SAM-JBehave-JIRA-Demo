@@ -48,10 +48,10 @@ public class PublishJiraReport {
 
             Map<String, Integer> scenarioResult = xml
                     .getScenarioResult(scenarioElement);
-            System.out.println(scenarioResult);
-            
-            if (scenarioResult.get(PENDING) == 0) {
+            System.out.println("RESULT for " + jiraStoryId +":- "+scenarioResult);
 
+            if (scenarioResult.get(PENDING) == 0) {
+                
                 if (scenarioResult.get(FAIL) == 0) {
                     jsonResultText = jsonResultText + "{color:green}"
                             + scenarioTitle + " - *PASSED*" + "{color}"
@@ -82,7 +82,7 @@ public class PublishJiraReport {
                             FAIL);
                 }
 
-            } else {
+            } else if (scenarioResult.get(PENDING) > 0){
                 jsonResultText = jsonResultText + "{color:blue}" + scenarioTitle
                         + " - *PASSED*" + "{color}" + "\\n\\n";
 
@@ -148,6 +148,7 @@ public class PublishJiraReport {
 
         if (getstoryStatus(_storystatus.values()).equalsIgnoreCase(PENDING)) {
             System.out.println("NO JIRA ACTION");
+            getChangeAssigneeJson("sandeep.singh");
             return "";
         } else if (getstoryStatus(_storystatus.values()).equalsIgnoreCase(FAIL)) {
 
@@ -161,7 +162,7 @@ public class PublishJiraReport {
             System.out.println("\nREOPENING JIRA TICKET:- " + _jiraStoryId
                     + "\n");
             return response;
-        } else if (getstoryStatus(_storystatus.values()).equalsIgnoreCase(PASS)){
+        } else if (getstoryStatus(_storystatus.values()).equalsIgnoreCase(PASS)) {
             try {
                 response = new HttpClient().postHttpResponse(jiratransitionurl,
                         getCloseTicketJson()).getEntity(String.class);
@@ -177,15 +178,15 @@ public class PublishJiraReport {
     }
 
     private String getstoryStatus(Collection<String> storyvalues) {
-
+        String returnValue = PASS;
         for (String value : storyvalues) {
-            if (value.equalsIgnoreCase(PENDING)) {
-                return PENDING;
-            } else if (value.equalsIgnoreCase(FAIL)) {
+            if (value.equalsIgnoreCase(FAIL)) {
                 return FAIL;
+            } else if (value.equalsIgnoreCase(PENDING)) {
+                returnValue = PENDING;
             }
         }
-        return PASS;
+        return returnValue;
     }
 
     private String changeJiraAssignee(String _jiraStoryId, String jiraUserName) {

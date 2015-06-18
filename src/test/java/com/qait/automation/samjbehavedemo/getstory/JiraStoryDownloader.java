@@ -7,6 +7,7 @@ package com.qait.automation.samjbehavedemo.getstory;
 
 import com.qait.automation.samjbehavedemo.utils.ConfigPropertyReader;
 import com.qait.automation.samjbehavedemo.utils.report.email.Emailer;
+import com.sun.jna.platform.unix.X11;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -66,6 +67,7 @@ public class JiraStoryDownloader {
                 new FileOutputStream(storyLoc + this.jiraStoryId + ".story"),
                 "utf-8"))) {
             writer.write(jiraStory);
+            System.out.println("Loading Test Story for Testing:- " + this.jiraStoryId);
         } catch (UnsupportedEncodingException ex) {
             ex.printStackTrace();
             Logger.getLogger(JiraStoryDownloader.class.getName()).log(

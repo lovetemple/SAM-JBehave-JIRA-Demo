@@ -39,7 +39,7 @@ public class JiraSprintStoryFinder {
 
                 if (Constants.ALLOWED_TYPE.contains(issueJson.getString("typeName").trim())) {
                     if (Constants.ALLOWED_STATUS.contains(issueJson.getString("statusName").trim())) {
-                        System.out.println("The Story: \'" + issueJson.getString("key") + "\' will be tested");
+                        //TODO: System.out.println("The Story: \'" + issueJson.getString("key") + "\' will be tested");
                         testStories.add(issueJson.getString("key"));
                     }
                 }
