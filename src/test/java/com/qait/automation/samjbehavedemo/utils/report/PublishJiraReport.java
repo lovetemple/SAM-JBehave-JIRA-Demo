@@ -29,8 +29,6 @@ public class PublishJiraReport {
 
     private Map<String, String> storyStatus = new LinkedHashMap<String, String>();
 
-    ;
-
     public PublishJiraReport() {
     }
 
@@ -106,6 +104,7 @@ public class PublishJiraReport {
             }
         }
         jsonResultText = jsonResultText + "\"}";
+        System.out.println(jsonResultText);
         return jsonResultText;
     }
 
@@ -126,6 +125,7 @@ public class PublishJiraReport {
                         + client.postHttpResponse(jiracommenturl,
                                 this.createJiraCommentJson(jiraStoryId))
                         .getEntity(String.class) + "\n";
+                System.out.println("RESPONSE COMMENT:- " + response);
                 moveJiraTicket(jiraStoryId, this.storyStatus);
             } else {
                 System.out
@@ -148,7 +148,7 @@ public class PublishJiraReport {
 
         if (getstoryStatus(_storystatus.values()).equalsIgnoreCase(PENDING)) {
             System.out.println("NO JIRA ACTION");
-            getChangeAssigneeJson("sandeep.singh");
+            getChangeAssigneeJson("automation-script");
             return "";
         } else if (getstoryStatus(_storystatus.values()).equalsIgnoreCase(FAIL)) {
 
@@ -156,8 +156,10 @@ public class PublishJiraReport {
                 response = new HttpClient().postHttpResponse(jiratransitionurl,
                         getReopenJiraTicketJson()).getEntity(String.class);
 
-                getChangeAssigneeJson("sandeep.singh");
+                getChangeAssigneeJson("rohitsingh");
             } catch (UniformInterfaceException e) {
+            	//e.printStackTrace();
+                getChangeAssigneeJson("rohitsingh");
             }
             System.out.println("\nREOPENING JIRA TICKET:- " + _jiraStoryId
                     + "\n");
@@ -168,7 +170,7 @@ public class PublishJiraReport {
                         getCloseTicketJson()).getEntity(String.class);
                 changeJiraAssignee(_jiraStoryId, "-1");
             } catch (UniformInterfaceException e) {
-                // TODO: handle exception
+            	//e.printStackTrace();
             }
             System.out
                     .println("\nCLOSING JIRA TICKET:- " + _jiraStoryId + "\n");
@@ -200,7 +202,7 @@ public class PublishJiraReport {
                     .getEntity(String.class
                     );
         } catch (UniformInterfaceException e) {
-            // TODO: handle exception
+        	//e.printStackTrace();
         }
         return response;
     }

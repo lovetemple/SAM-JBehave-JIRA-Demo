@@ -2,10 +2,10 @@ app_url: http://qa3-sam.cengage.com/app
 
 credentials:
   instructor:
-    username: inst5june@qai.com
+    username: Inst_Auto-qa3@swelearning.com
     password: password 
   student:
-    username: stud5june@qai.com
+    username: Stud_Auto-qa3@swlearning.com
     password: password
       
 

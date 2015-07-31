@@ -17,6 +17,7 @@ lbl_dropbox     css     label.DropboxLabel
 --------------------------------
 inp_password
     below: inp_username 10 px
+    hover: css 
 
 @all
 --------------------------------
