@@ -73,7 +73,7 @@ public class StoryTest extends JUnitStories {
             });
         }
         configuredEmbedder().embedderControls().doGenerateViewAfterStories(true).doIgnoreFailureInStories(true)
-                .doIgnoreFailureInView(true).useThreads(1).useStoryTimeoutInSecs(60);
+                .doIgnoreFailureInView(true).useThreads(1).useStoryTimeoutInSecs(180);
     }
 
     @Override

@@ -104,7 +104,7 @@ public class PublishJiraReport {
             }
         }
         jsonResultText = jsonResultText + "\"}";
-        System.out.println(jsonResultText);
+        
         return jsonResultText;
     }
 
@@ -125,7 +125,6 @@ public class PublishJiraReport {
                         + client.postHttpResponse(jiracommenturl,
                                 this.createJiraCommentJson(jiraStoryId))
                         .getEntity(String.class) + "\n";
-                System.out.println("RESPONSE COMMENT:- " + response);
                 moveJiraTicket(jiraStoryId, this.storyStatus);
             } else {
                 System.out
