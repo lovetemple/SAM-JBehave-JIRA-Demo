@@ -1,13 +1,8 @@
-app_url: http://qa3-sam.cengage.com/app
+app_url: http://search.alexanderstreet.com/
 
 credentials:
-  instructor:
-    username: Inst_Auto-qa3@swelearning.com
-    password: password 
-  student:
-    username: Stud_Auto-qa3@swlearning.com
-    password: password
-      
+ username: utkarshakhouri@qainfotech.net
+ password: Qait@123
 
 email:
     send: yes
