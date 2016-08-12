@@ -12,7 +12,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<seleniumver>2.45.0</seleniumver>
+		<seleniumver>2.53.1</seleniumver>
 	</properties>
 
 	<build>

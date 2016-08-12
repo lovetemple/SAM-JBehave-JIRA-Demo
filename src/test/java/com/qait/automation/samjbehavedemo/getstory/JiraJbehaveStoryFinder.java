@@ -1,9 +1,10 @@
 package com.qait.automation.samjbehavedemo.getstory;
 
+import org.codehaus.jettison.json.JSONException;
+
 import com.qait.automation.samjbehavedemo.utils.HttpClient;
 import com.qait.automation.samjbehavedemo.utils.JsonParser;
 import com.sun.jersey.api.client.ClientResponse;
-import org.codehaus.jettison.json.JSONException;
 
 /**
  *
